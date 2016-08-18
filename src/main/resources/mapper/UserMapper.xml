@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.easyar.dao.UserDao">
+
+<!-- 	 <resultMap type="com.ucardstore.entity.User" id="resultUEC">
+  <result property="email" column="email"  javaType="string" jdbcType="VARCHAR"/>
+  <result property="coupon" column="coupon" javaType="string" jdbcType="VARCHAR"/>
+ 	</resultMap>  -->	
+
+
+	<insert id="add"  parameterType="com.easyar.entity.User">
+		insert into user (email,coupon) values (#{email},#{coupon})
+	</insert>
+
+	<select id="findUserByEmail"  parameterType="string"	resultType="com.easyar.entity.User">
+		select email,coupon from user where email=#{email}
+	</select>
+	
+	<select id="findUserByCoupon"  parameterType="string"	resultType="com.easyar.entity.User">
+		select email,coupon from user where coupon=#{coupon}
+	</select>
+
+</mapper>
