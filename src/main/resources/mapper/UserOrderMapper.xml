@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+ 	<mapper  namespace="com.easyar.dao.UserOrderMapper">
+ 		<resultMap type="com.easyar.entity.UserOrder" id="resultUEC">
+  			<result property="orderID" column="orderid"  javaType="string" jdbcType="VARCHAR"/>
+  			<result property="money" column="money" javaType="float" jdbcType="FLOAT"/>
+  			<result property="invitationCode" column="invitationcode" javaType="string" jdbcType="VARCHAR"/>			
+ 		</resultMap>
+ 
+ 		 	<insert id="add"  parameterType="com.easyar.entity.UserOrder">
+				insert into userorder (orderid,money,invitationcode) values (#{orderID},#{money},#{invitationCode})
+			</insert>
+ 
+ 
+ 	</mapper>

@@ -51,7 +51,7 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	@RequestMapping(value = "/test", method = {RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	public ResultInfo test(String username) {
 		ResultInfo resultInfo = new ResultInfo();

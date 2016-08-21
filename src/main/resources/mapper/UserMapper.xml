@@ -10,15 +10,15 @@
 
 
 	<insert id="add"  parameterType="com.easyar.entity.User">
-		insert into user (email,coupon) values (#{email},#{coupon})
+		insert into usercoupon (email,coupon) values (#{email},#{coupon})
 	</insert>
 
 	<select id="findUserByEmail"  parameterType="string"	resultType="com.easyar.entity.User">
-		select email,coupon from user where email=#{email}
+		select email,coupon from usercoupon where email=#{email}
 	</select>
 	
 	<select id="findUserByCoupon"  parameterType="string"	resultType="com.easyar.entity.User">
-		select email,coupon from user where coupon=#{coupon}
+		select email,coupon from usercoupon where coupon=#{coupon}
 	</select>
 
 </mapper>

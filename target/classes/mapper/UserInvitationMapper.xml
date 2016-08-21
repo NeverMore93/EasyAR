@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+ <mapper namespace="com.easyar.dao.UserInvitationMapper">
+ 		<resultMap type="com.easyar.entity.UserInvitation" id="resultUEC">
+  			<result property="userID" column="userid"  javaType="string" jdbcType="VARCHAR"/>
+  			<result property="invitationCode" column="invitationcode" javaType="string" jdbcType="VARCHAR"/>
+ 		</resultMap>
+ 		
+ 			<insert id="add"  parameterType="com.easyar.entity.UserInvitation">
+				insert into userinvitation (userid,invitationcode) values (#{userID},#{invitationCode})
+			</insert>
+
+			<select id="findUserByID"  parameterType="string"	resultType="com.easyar.entity.UserInvitation">
+				select userid,invitationcode from userinvitation where userid=#{userID}
+			</select>
+ 
+ 
+ 		
+ </mapper>
