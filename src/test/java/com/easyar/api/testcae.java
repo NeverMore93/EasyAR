@@ -69,8 +69,13 @@ public class testcae {
 		User user = userDao.findUserByEmail("1305882275@qq.com");
 		System.out.println(user.toString());
 		
+	}
+	
+	@Test
+	public void test5(){
+		String userid = "9f068813-2c1b-48db-b72a-b3a1bd91b9bf";
 		
-		
+		System.out.println(userid.matches("[a-z0-9_-]{36}"));
 	}
 	
 	

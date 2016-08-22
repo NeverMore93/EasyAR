@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.easyar.constant.ResultInfoConstants;
 import com.easyar.entity.UserInvitation;
 import com.easyar.entity.UserOrder;
+import com.easyar.exception.IllegalUserIDException;
 import com.easyar.exception.ReAddUserInvitationException;
 import com.easyar.exception.UserIDNoFindException;
 import com.easyar.model.ResultInfo;
@@ -32,6 +33,10 @@ public class UserOrderController {
 	@ResponseBody
     public ResultInfo addUserInvitation(UserInvitation userInvitation){
 		ResultInfo resultInfo=null;
+		if(!userInvitation.getUserID().matches("[a-z0-9_-]{36}")){
+			throw new IllegalUserIDException();
+		}
+		
 		try {
 			 resultInfo = userInvitationService.add(userInvitation);
 		} catch (Exception e) {
@@ -82,6 +87,18 @@ public class UserOrderController {
         ResultInfo resultInfo = new ResultInfo();
         resultInfo.setCode(ResultInfoConstants.FAIL);
         resultInfo.setMsg("查询失败");
+        resultInfo.setData(null);
+		return resultInfo;
+    }
+	
+	
+	@ResponseStatus(value=HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(IllegalUserIDException.class)
+	@ResponseBody
+    public ResultInfo IllegalUserID(){
+        ResultInfo resultInfo = new ResultInfo();
+        resultInfo.setCode(ResultInfoConstants.FAIL);
+        resultInfo.setMsg("无效的userID");
         resultInfo.setData(null);
 		return resultInfo;
     }
