@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.easyar.constant.ResultInfoConstants;
 import com.easyar.dao.UserInvitationMapper;
 import com.easyar.entity.UserInvitation;
+import com.easyar.exception.ReAddUserInvitationException;
 import com.easyar.model.ResultInfo;
 
 
@@ -18,19 +19,12 @@ public class UserInvitationServiceImpl implements UserInvitationService{
 	
 	@Override
 	public ResultInfo add(UserInvitation userInvitation) {
-		ResultInfo resultInfo = new ResultInfo();
-		UserInvitation userInvitation2 = userInvitationMapper.findUserByID(userInvitation.getUserID());
-		if(userInvitation2==null){
+			ResultInfo resultInfo = new ResultInfo();
 			userInvitationMapper.add(userInvitation);
 			resultInfo.setCode(ResultInfoConstants.SUCCESS);
 			resultInfo.setData(userInvitation);
 			resultInfo.setMsg("添加成功");
 			return resultInfo;
-		}
-		resultInfo.setCode(ResultInfoConstants.FAIL);
-		resultInfo.setData(userInvitation);
-		resultInfo.setMsg("已存在，请勿重复添加");
-		return resultInfo;
 	}
 
 	@Override
@@ -39,10 +33,11 @@ public class UserInvitationServiceImpl implements UserInvitationService{
 		UserInvitation userInvitation = userInvitationMapper.findUserByID(userID);
 		if(userInvitation==null){
 			resultInfo.setCode(ResultInfoConstants.FAIL);
-			resultInfo.setData("");
+			resultInfo.setData(null);
 			resultInfo.setMsg("不存在用户");
+			
 		}
-		
+		System.out.println(userInvitation.toString()+"test");
 		resultInfo.setCode(ResultInfoConstants.SUCCESS);
 		resultInfo.setData(userInvitation);
 		resultInfo.setMsg("查询成功");	
